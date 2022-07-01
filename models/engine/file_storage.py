@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+""""""
+
+
+import json
+
 
 class FileStorage:
     """"""
@@ -25,4 +30,3 @@ class FileStorage:
                 self.__objects = json.load(f)
         except FileNotFoundError:
             pass
-    

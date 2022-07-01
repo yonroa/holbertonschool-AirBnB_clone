@@ -25,12 +25,13 @@ class BaseModel:
                     self.updated_at = datetime.datetime.strptime(
                         value, '%Y-%m-%dT%H:%M:%S.%f')
                 else:
-                    setattr(self, key, value)
+                    if key != '__class__':
+                        setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.datetime.now()
             self.updated_at = datetime.datetime.now()
-            storage.new()
+            storage.new(self)
 
     def __str__(self):
         """Returns a nice print of the base model"""
@@ -40,11 +41,12 @@ class BaseModel:
     def save(self):
         """Saves the date of the update of the class"""
         self.updated_at = datetime.datetime.now()
-        storage.save()
+        storage.save(self)
 
     def to_dict(self):
         """Returns a new dict of the class"""
         new_dict = self.__dict__.copy()
+        new_dict['__class__'] = self.__class__.__name__
         new_dict['created_at'] = self.created_at.isoformat()
         new_dict['updated_at'] = self.updated_at.isoformat()
         return new_dict
