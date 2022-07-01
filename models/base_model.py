@@ -6,6 +6,7 @@ the base for all other classes
 
 import uuid
 import datetime
+from models import storage
 
 
 class BaseModel:
@@ -29,6 +30,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.datetime.now()
             self.updated_at = datetime.datetime.now()
+            storage.new()
 
     def __str__(self):
         """Returns a nice print of the base model"""
@@ -38,6 +40,7 @@ class BaseModel:
     def save(self):
         """Saves the date of the update of the class"""
         self.updated_at = datetime.datetime.now()
+        storage.save()
 
     def to_dict(self):
         """Returns a new dict of the class"""
