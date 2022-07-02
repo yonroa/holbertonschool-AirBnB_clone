@@ -1,32 +1,40 @@
 #!/usr/bin/python3
-""""""
-
+"""FileStorage
+This module contains the FileStorage class
+which controls object storage
+"""
 
 import json
+from os import path
+from models.base_model import BaseModel
 
 
 class FileStorage:
-    """"""
-    __file_path = "file.json"
+    """This class serializes instances to a JSON file
+    and deserializes JSON file to instances
+    """
+    __file_path = "objects.json"
     __objects = {}
 
     def all(self):
-        """"""
+        """returns the dictionary __objects"""
         return self.__objects
 
     def new(self, obj):
-        """"""
-        self.__objects[obj.__class__.__name__ + "." + obj.id] = obj
+        """sets in __objects the obj with key <obj class name>.id"""
+        key = f"{type(obj).__name__}.{obj.id}"
+        self.__objects[key] = obj
 
     def save(self):
-        """"""
-        with open(self.__file_path, 'w') as f:
-            f.write(self.__objects)
-    
+        """serializes __objects to the JSON file (__file_path)"""
+        with open(self.__file_path, mode='w', encoding='utf-8') as file:
+            data = {key: v.to_dict() for key, v in self.__objects.items()}
+            json.dump(data, file)
+
     def reload(self):
-        """"""
-        try:
-            with open(self.__file_path, 'r') as f:
-                self.__objects = json.load(f)
-        except FileNotFoundError:
-            pass
+        """deserializes the JSON file to __objects"""
+        if path.exists(self.__file_path):
+            with open(self.__file_path, mode='r', encoding='utf-8') as file:
+                json_dict = json.loads(file.read())
+                for key, v in json_dict.items():
+                    self.__objects[key] = eval(v['__class__'])(**v)
