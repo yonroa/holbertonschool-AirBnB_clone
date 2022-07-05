@@ -38,7 +38,8 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, line):
-        """Creates a new instance and saves it
+        """
+        Creates a new instance and saves it
 
         Ex: (hbnb) create BaseModel
         """
@@ -52,7 +53,8 @@ class HBNBCommand(cmd.Cmd):
             print(new_obj.id)
 
     def do_show(self, line):
-        """Prints the string representation of an
+        """
+        Prints the string representation of an
         instance based on the class name and id
 
         Ex: (hbnb) show BaseModel 1234-1234-1234
@@ -73,7 +75,8 @@ class HBNBCommand(cmd.Cmd):
                     print(storage.all()[key])
 
     def do_destroy(self, line):
-        """Deletes an instance based on the class name and id
+        """
+        Deletes an instance based on the class name and id
 
         Ex: (hbnb) destroy BaseModel 1234-1234-1234
         """
@@ -94,7 +97,8 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
 
     def do_all(self, line):
-        """Prints all string representation of all
+        """
+        Prints all string representation of all
         instances based or not on the class name
 
         Ex: (hbnb) all BaseModel or (hbnb) all
@@ -111,7 +115,8 @@ class HBNBCommand(cmd.Cmd):
                 print(obj)
 
     def do_update(self, line):
-        """Updates an instance based on the class
+        """
+        Updates an instance based on the class
         name and id by adding or updating attribute
 
         Usage: update <class name> <id> <attribute name> "<attribute value>"
@@ -141,7 +146,8 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def analyze(self, value):
-        """Analyze the value and check if it
+        """
+        Analyze the value and check if it
         need to be converted to int or float
         """
         if value.isdigit():
@@ -170,9 +176,7 @@ class HBNBCommand(cmd.Cmd):
                     print(self.get_instances(command[0]))
 
     def get_instances(self, object=""):
-        """
-        Gets the objects of the specified class
-        """
+        """Gets the objects of the specified class"""
         instances = storage.all()
 
         if object:
