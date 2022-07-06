@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""
-Tests from file storage
+""" Tets from file storage
 """
 
 
@@ -21,49 +20,36 @@ from models.review import Review
 
 class TestFileStorage(unittest.TestCase):
     """
-    Class to test the file 'FileStorage'
     """
 
     def setUp(self):
-        """
-        Method setup
-        """
+        """Method setup"""
         pass
 
     def resetStorage(self):
-        """
-        Reset the file 'file.json'
-        """
+        """"""
         FileStorage._FileStorage__objects = {}
         if os.path.exists(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
 
     def tearDown(self):
-        """
-        Executes at the end of the program
-        """
+        """"""
         self.resetStorage()
         pass
 
     def test_instance(self):
-        """
-        Test the correct instance of FileStorage
-        """
+        """"""
         self.assertEqual(type(storage).__name__, "FileStorage")
 
     def test_attr(self):
-        """
-        Test the correct attributes of FileStorage
-        """
+        """"""
         self.resetStorage()
         self.assertTrue(hasattr(FileStorage, "_FileStorage__file_path"))
         self.assertTrue(hasattr(FileStorage, "_FileStorage__objects"))
         self.assertEqual(getattr(FileStorage, "_FileStorage__objects"), {})
 
     def prueba_all_(self, line):
-        """
-        test the method all()
-        """
+        """"""
         self.resetStorage()
         object = eval(line)()
         storage.new(object)
@@ -100,9 +86,7 @@ class TestFileStorage(unittest.TestCase):
         self.prueba_all_("Review")
 
     def prueba_all(self, line):
-        """
-        test the method all() whit multiple objects
-        """
+        """"""
         self.resetStorage()
         dict_objects = [eval(line)() for i in range(1000)]
         [storage.new(obj) for obj in dict_objects]
@@ -141,9 +125,7 @@ class TestFileStorage(unittest.TestCase):
         self.prueba_all("Review")
 
     def Prueba_new(self, line):
-        """
-        test the method new()
-        """
+        """"""
         self.resetStorage()
         new = eval(line)()
         storage.new(new)
@@ -180,9 +162,7 @@ class TestFileStorage(unittest.TestCase):
         self.Prueba_new("Review")
 
     def prueba_save(self, line):
-        """
-        test the method save()
-        """
+        """"""
         self.resetStorage()
         new_obj = eval(line)()
         storage.new(new_obj)
@@ -225,9 +205,7 @@ class TestFileStorage(unittest.TestCase):
         self.prueba_save("Review")
 
     def prueba_reload(self, line):
-        """
-        test the method reload
-        """
+        """"""
         self.resetStorage()
         self.assertEqual(FileStorage._FileStorage__objects, {})
         new_reload = eval(line)()
