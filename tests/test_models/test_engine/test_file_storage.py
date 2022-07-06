@@ -124,7 +124,7 @@ class TestFileStorage(unittest.TestCase):
         """Tests all_multiple() method for Review."""
         self.prueba_all("Review")
 
-    def test_5_all_no_args(self):
+    def test_all_no_args(self):
         """Tests all() with no arguments."""
         self.resetStorage()
         with self.assertRaises(TypeError) as e:
@@ -132,7 +132,7 @@ class TestFileStorage(unittest.TestCase):
         msg = "all() missing 1 required positional argument: 'self'"
         self.assertEqual(str(e.exception), msg)
 
-    def test_5_all_excess_args(self):
+    def test_all_excess_args(self):
         """Tests all() with too many arguments."""
         self.resetStorage()
         with self.assertRaises(TypeError) as e:
@@ -177,7 +177,7 @@ class TestFileStorage(unittest.TestCase):
         """Tests new() method for Review."""
         self.Prueba_new("Review")
 
-    def test_5_new_no_args(self):
+    def test_new_no_args(self):
         """Tests new() with no arguments."""
         self.resetStorage()
         with self.assertRaises(TypeError) as e:
@@ -185,7 +185,7 @@ class TestFileStorage(unittest.TestCase):
         msg = "new() missing 1 required positional argument: 'obj'"
         self.assertEqual(str(e.exception), msg)
 
-    def test_5_new_excess_args(self):
+    def test_new_excess_args(self):
         """Tests new() with too many arguments."""
         self.resetStorage()
         b = BaseModel()
@@ -237,7 +237,7 @@ class TestFileStorage(unittest.TestCase):
         """Tests save() method for Review."""
         self.prueba_save("Review")
 
-    def test_5_save_no_args(self):
+    def test_save_no_args(self):
         """Tests save() with no arguments."""
         self.resetStorage()
         with self.assertRaises(TypeError) as e:
@@ -245,7 +245,7 @@ class TestFileStorage(unittest.TestCase):
         msg = "save() missing 1 required positional argument: 'self'"
         self.assertEqual(str(e.exception), msg)
 
-    def test_5_save_excess_args(self):
+    def test_save_excess_args(self):
         """Tests save() with too many arguments."""
         self.resetStorage()
         with self.assertRaises(TypeError) as e:
@@ -307,6 +307,48 @@ class TestFileStorage(unittest.TestCase):
             FileStorage.reload(self, 98)
         msg = "reload() takes 1 positional argument but 2 were given"
         self.assertEqual(str(e.exception), msg)
+
+    def prueba_reload_mismatch(self, classname):
+        """Helps test reload() method for classname."""
+        self.resetStorage()
+        storage.reload()
+        self.assertEqual(FileStorage._FileStorage__objects, {})
+
+        o = eval(classname)()
+        storage.new(o)
+        key = "{}.{}".format(type(o).__name__, o.id)
+        storage.save()
+        o.name = "Laura"
+        storage.reload()
+        self.assertNotEqual(o.to_dict(), storage.all()[key].to_dict())
+
+    def test_reload_mismatch_base_model(self):
+        """Tests reload() method mismatch for BaseModel."""
+        self.prueba_reload_mismatch("BaseModel")
+
+    def test_reload_mismatch_user(self):
+        """Tests reload_mismatch() method for User."""
+        self.prueba_reload_mismatch("User")
+
+    def test_reload_mismatch_state(self):
+        """Tests reload_mismatch() method for State."""
+        self.prueba_reload_mismatch("State")
+
+    def test_reload_mismatch_city(self):
+        """Tests reload_mismatch() method for City."""
+        self.prueba_reload_mismatch("City")
+
+    def test_reload_mismatch_amenity(self):
+        """Tests reload_mismatch() method for Amenity."""
+        self.prueba_reload_mismatch("Amenity")
+
+    def test_reload_mismatch_place(self):
+        """Tests reload_mismatch() method for Place."""
+        self.prueba_reload_mismatch("Place")
+
+    def test_reload_mismatch_review(self):
+        """Tests reload_mismatch() method for Review."""
+        self.prueba_reload_mismatch("Review")
 
 
 if __name__ == "__main__":
