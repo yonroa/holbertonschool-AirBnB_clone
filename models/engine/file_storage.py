@@ -39,16 +39,9 @@ class FileStorage:
             json.dump(data, file)
 
     def reload(self):
-        """Desearlizes the JSON file to '__objects':
-        checks existence of the JSON file, reads data and instantiates every
-        dictionary representation according the ['__class__'] name"""
-        file = FileStorage.__file_path
-        if path.exists(file):
-            with open(file, 'r', encoding='utf-8') as jfile:
-                FileStorage.__objects = json.load(jfile)
-                for key, val in FileStorage.__objects.items():
-                    c = FileStorage.__objects[key]['__class__']
-                    try:
-                        FileStorage.__objects[key] = self.__classes[c](**val)
-                    except Exception:
-                        pass
+        """deserializes the JSON file to __objects"""
+        if path.exists(self.__file_path):
+            with open(self.__file_path, mode='r', encoding='utf-8') as file:
+                json_dict = json.loads(file.read())
+                for key, v in json_dict.items():
+                    self.__objects[key] = eval(v['__class__'])(**v)
