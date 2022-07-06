@@ -23,33 +23,40 @@ class TestFileStorage(unittest.TestCase):
     """
 
     def setUp(self):
-        """Method setup"""
+        """
+        Method setup
+        """
         pass
 
     def resetStorage(self):
-        """"""
+        """
+        """
         FileStorage._FileStorage__objects = {}
         if os.path.exists(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
 
     def tearDown(self):
-        """"""
+        """
+        """
         self.resetStorage()
         pass
 
     def test_instance(self):
-        """"""
+        """
+        """
         self.assertEqual(type(storage).__name__, "FileStorage")
 
     def test_attr(self):
-        """"""
+        """
+        """
         self.resetStorage()
         self.assertTrue(hasattr(FileStorage, "_FileStorage__file_path"))
         self.assertTrue(hasattr(FileStorage, "_FileStorage__objects"))
         self.assertEqual(getattr(FileStorage, "_FileStorage__objects"), {})
 
     def prueba_all_(self, line):
-        """"""
+        """
+        """
         self.resetStorage()
         object = eval(line)()
         storage.new(object)
@@ -86,7 +93,8 @@ class TestFileStorage(unittest.TestCase):
         self.prueba_all_("Review")
 
     def prueba_all(self, line):
-        """"""
+        """
+        """
         self.resetStorage()
         dict_objects = [eval(line)() for i in range(1000)]
         [storage.new(obj) for obj in dict_objects]
@@ -125,7 +133,8 @@ class TestFileStorage(unittest.TestCase):
         self.prueba_all("Review")
 
     def Prueba_new(self, line):
-        """"""
+        """
+        """
         self.resetStorage()
         new = eval(line)()
         storage.new(new)
@@ -162,7 +171,8 @@ class TestFileStorage(unittest.TestCase):
         self.Prueba_new("Review")
 
     def prueba_save(self, line):
-        """"""
+        """
+        """
         self.resetStorage()
         new_obj = eval(line)()
         storage.new(new_obj)
@@ -205,7 +215,8 @@ class TestFileStorage(unittest.TestCase):
         self.prueba_save("Review")
 
     def prueba_reload(self, line):
-        """"""
+        """
+        """
         self.resetStorage()
         self.assertEqual(FileStorage._FileStorage__objects, {})
         new_reload = eval(line)()
