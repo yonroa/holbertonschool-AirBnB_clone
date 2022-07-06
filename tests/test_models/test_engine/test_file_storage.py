@@ -1,258 +1,247 @@
 #!/usr/bin/python3
-"""
-This module is used to test the FileStorage class
+""" Tets from file storage
 """
 
 
 import json
 import unittest
 from models.base_model import BaseModel
-from models.user import User
-from models.city import City
-from models.state import State
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
 from models.engine.file_storage import FileStorage
 from models import storage
 import os
+from models import review
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
-class TestStorage(unittest.TestCase):
+class TestFileStorage(unittest.TestCase):
     """
     """
 
     def setUp(self):
-        """
-        """
+        """Method setup"""
         pass
 
-    def reset_Storage(self):
-        """
-        """
+    def resetStorage(self):
+        """"""
         FileStorage._FileStorage__objects = {}
         if os.path.exists(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
 
     def tearDown(self):
-        """
-        """
-        self.reset_Storage()
+        """"""
+        self.resetStorage()
         pass
 
-    def test_instantiation(self):
-        """
-        """
+    def test_instance(self):
+        """"""
         self.assertEqual(type(storage).__name__, "FileStorage")
 
-    def test_attributes(self):
-        """
-        """
-        self.reset_Storage()
+    def test_attr(self):
+        """"""
+        self.resetStorage()
         self.assertTrue(hasattr(FileStorage, "_FileStorage__file_path"))
         self.assertTrue(hasattr(FileStorage, "_FileStorage__objects"))
         self.assertEqual(getattr(FileStorage, "_FileStorage__objects"), {})
 
-    def check_all(self, class_name):
-        """
-        """
-        self.reset_Storage()
-        obj = eval(class_name)()
-        storage.new(obj)
-        key = f"{type(obj).__name__}.{obj.id}"
+    def prueba_all_(self, line):
+        """"""
+        self.resetStorage()
+        object = eval(line)()
+        storage.new(object)
+        key = f"{type(object).__name__}.{object.id}"
         self.assertTrue(key in storage.all())
-        self.assertEqual(storage.all()[key], obj)
+        self.assertEqual(storage.all()[key], object)
 
-    def test_all_base_model(self):
+    def test_all__base_model(self):
         """Tests all() method for BaseModel."""
-        self.check_all("BaseModel")
+        self.prueba_all_("BaseModel")
 
-    def test_all_user(self):
+    def test_all__user(self):
         """Tests all() method for User."""
-        self.check_all("User")
+        self.prueba_all_("User")
 
-    def test_all_state(self):
+    def test_all__state(self):
         """Tests all() method for State."""
-        self.check_all("State")
+        self.prueba_all_("State")
 
-    def test_all_city(self):
+    def test_all__city(self):
         """Tests all() method for City."""
-        self.check_all("City")
+        self.prueba_all_("City")
 
-    def test_all_amenity(self):
+    def test_all__amenity(self):
         """Tests all() method for Amenity."""
-        self.check_all("Amenity")
+        self.prueba_all_("Amenity")
 
-    def test_all_place(self):
+    def test_all__place(self):
         """Tests all() method for Place."""
-        self.check_all("Place")
+        self.prueba_all_("Place")
 
-    def test_all_review(self):
+    def test_all__review(self):
         """Tests all() method for Review."""
-        self.check_all("Review")
+        self.prueba_all_("Review")
 
-    def check_all_multiple(self, class_name):
-        """
-        """
-        self.reset_Storage()
-
-        objs = [eval(class_name)() for i in range(1000)]
-        [storage.new(o) for o in objs]
-        self.assertEqual(len(objs), len(storage.all()))
-        for o in objs:
-            key = "{}.{}".format(type(o).__name__, o.id)
+    def prueba_all(self, line):
+        """"""
+        self.resetStorage()
+        dict_objects = [eval(line)() for i in range(1000)]
+        [storage.new(obj) for obj in dict_objects]
+        self.assertEqual(len(dict_objects), len(storage.all()))
+        for s in dict_objects:
+            key = f"{type(s).__name__}.{s.id}"
             self.assertTrue(key in storage.all())
-            self.assertEqual(storage.all()[key], o)
+            self.assertEqual(storage.all()[key], s)
 
-    def test_all_multiple_base_model(self):
+    def test_alliple_base_model(self):
         """Tests all() method with many objects."""
-        self.check_all_multiple("BaseModel")
+        self.prueba_all("BaseModel")
 
-    def test_all_multiple_user(self):
+    def test_alliple_user(self):
         """Tests all_multiple() method for User."""
-        self.check_all_multiple("User")
+        self.prueba_all("User")
 
-    def test_all_multiple_state(self):
+    def test_alliple_state(self):
         """Tests all_multiple() method for State."""
-        self.check_all_multiple("State")
+        self.prueba_all("State")
 
-    def test_all_multiple_city(self):
+    def test_alliple_city(self):
         """Tests all_multiple() method for City."""
-        self.check_all_multiple("City")
+        self.prueba_all("City")
 
-    def test_all_multiple_amenity(self):
+    def test_alliple_amenity(self):
         """Tests all_multiple() method for Amenity."""
-        self.check_all_multiple("Amenity")
+        self.prueba_all("Amenity")
 
-    def test_all_multiple_place(self):
+    def test_alliple_place(self):
         """Tests all_multiple() method for Place."""
-        self.check_all_multiple("Place")
+        self.prueba_all("Place")
 
-    def test_all_multiple_review(self):
+    def test_alliple_review(self):
         """Tests all_multiple() method for Review."""
-        self.check_all_multiple("Review")
+        self.prueba_all("Review")
 
-    def check_new(self, class_name):
-        """
-        """
-        self.reset_Storage()
-        o = eval(class_name)()
-        storage.new(o)
-        key = "{}.{}".format(type(o).__name__, o.id)
+    def Prueba_new(self, line):
+        """"""
+        self.resetStorage()
+        new = eval(line)()
+        storage.new(new)
+        key = f"{type(new).__name__}.{new.id}"
         self.assertTrue(key in FileStorage._FileStorage__objects)
-        self.assertEqual(FileStorage._FileStorage__objects[key], o)
+        self.assertEqual(FileStorage._FileStorage__objects[key], new)
 
     def test_new_base_model(self):
         """Tests new() method for BaseModel."""
-        self.check_new("BaseModel")
+        self.Prueba_new("BaseModel")
 
     def test_new_user(self):
         """Tests new() method for User."""
-        self.check_new("User")
+        self.Prueba_new("User")
 
     def test_new_state(self):
         """Tests new() method for State."""
-        self.check_new("State")
+        self.Prueba_new("State")
 
     def test_new_city(self):
         """Tests new() method for City."""
-        self.check_new("City")
+        self.Prueba_new("City")
 
     def test_new_amenity(self):
         """Tests new() method for Amenity."""
-        self.check_new("Amenity")
+        self.Prueba_new("Amenity")
 
     def test_new_place(self):
         """Tests new() method for Place."""
-        self.check_new("Place")
+        self.Prueba_new("Place")
 
     def test_new_review(self):
         """Tests new() method for Review."""
-        self.check_new("Review")
+        self.Prueba_new("Review")
 
-    def check_save(self, line):
-        """
-        """
-        self.reset_Storage()
-        obj = eval(line)()
-        storage.new(obj)
-        key = "{}.{}".format(type(obj).__name__, obj.id)
+    def prueba_save(self, line):
+        """"""
+        self.resetStorage()
+        new_obj = eval(line)()
+        storage.new(new_obj)
+        key = f"{type(new_obj).__name__}.{new_obj.id}"
         storage.save()
         self.assertTrue(os.path.exists(FileStorage._FileStorage__file_path))
-        dict_n = {key: obj.to_dict()}
+        new_dict = {key: new_obj.to_dict()}
         with open(FileStorage._FileStorage__file_path,
                   "r", encoding="utf-8") as f:
-            self.assertEqual(len(f.read()), len(json.dumps(dict_n)))
+            self.assertEqual(len(f.read()), len(json.dumps(new_dict)))
             f.seek(0)
-            self.assertEqual(json.load(f), dict_n)
+            self.assertEqual(json.load(f), new_dict)
 
     def test_save_base_model(self):
         """Tests save() method for BaseModel."""
-        self.check_save("BaseModel")
+        self.prueba_save("BaseModel")
 
     def test_save_user(self):
         """Tests save() method for User."""
-        self.check_save("User")
+        self.prueba_save("User")
 
     def test_save_state(self):
         """Tests save() method for State."""
-        self.check_save("State")
+        self.prueba_save("State")
 
     def test_save_city(self):
         """Tests save() method for City."""
-        self.check_save("City")
+        self.prueba_save("City")
 
     def test_save_amenity(self):
         """Tests save() method for Amenity."""
-        self.check_save("Amenity")
+        self.prueba_save("Amenity")
 
     def test_save_place(self):
         """Tests save() method for Place."""
-        self.check_save("Place")
+        self.prueba_save("Place")
 
     def test_save_review(self):
         """Tests save() method for Review."""
-        self.check_save("Review")
+        self.prueba_save("Review")
 
-    def check_reload(self, line):
-        """
-        """
-        self.reset_Storage()
+    def prueba_reload(self, line):
+        """"""
+        self.resetStorage()
         self.assertEqual(FileStorage._FileStorage__objects, {})
-        new_obje = eval(line)()
-        storage.new(new_obje)
-        key = "{}.{}".format(type(new_obje).__name__, new_obje.id)
+        new_reload = eval(line)()
+        storage.new(new_reload)
+        key = f"{type(new_reload).__name__}.{new_reload.id}"
         storage.save()
         storage.reload()
-        self.assertEqual(new_obje.to_dict(), storage.all()[key].to_dict())
+        self.assertEqual(new_reload.to_dict(), storage.all()[key].to_dict())
 
     def test_reload_base_model(self):
         """Tests reload() method for BaseModel."""
-        self.check_reload("BaseModel")
+        self.prueba_reload("BaseModel")
 
     def test_reload_user(self):
         """Tests reload() method for User."""
-        self.check_reload("User")
+        self.prueba_reload("User")
 
     def test_reload_state(self):
         """Tests reload() method for State."""
-        self.check_reload("State")
+        self.prueba_reload("State")
 
     def test_reload_city(self):
         """Tests reload() method for City."""
-        self.check_reload("City")
+        self.prueba_reload("City")
 
     def test_reload_amenity(self):
         """Tests reload() method for Amenity."""
-        self.check_reload("Amenity")
+        self.prueba_reload("Amenity")
 
     def test_reload_place(self):
         """Tests reload() method for Place."""
-        self.check_reload("Place")
+        self.prueba_reload("Place")
 
     def test_reload_review(self):
         """Tests reload() method for Review."""
-        self.check_reload("Review")
+        self.prueba_reload("Review")
 
 
 if __name__ == "__main__":
