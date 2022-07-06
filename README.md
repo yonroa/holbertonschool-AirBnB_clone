@@ -4,7 +4,7 @@
 
 
 ```sh
-https://github.com/Yonroa/AirBnB_clone.git
+https://github.com/yonroa/holbertonschool-AirBnB_clone
 ```
 
 ## Execution
