@@ -7,6 +7,12 @@ This module is used to test the FileStorage class
 import json
 import unittest
 from models.base_model import BaseModel
+from models.user import User
+from models.city import City
+from models.state import State
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 from models.engine.file_storage import FileStorage
 from models import storage
 import os
@@ -19,14 +25,14 @@ class TestStorage(unittest.TestCase):
     def setUp(self):
         """
         """
-        self.object_test = BaseModel()
+        pass
 
     def reset_Storage(self):
         """
         """
-        FileStorage.__objects = {}
-        if os.path.exists(FileStorage.__file_path):
-            os.remove(FileStorage.__file_path)
+        FileStorage._FileStorage__objects = {}
+        if os.path.exists(FileStorage._FileStorage__file_path):
+            os.remove(FileStorage._FileStorage__file_path)
 
     def tearDown(self):
         """
@@ -37,7 +43,7 @@ class TestStorage(unittest.TestCase):
     def test_instantiation(self):
         """
         """
-        self.assertEqual(type(storage).__name__, FileStorage)
+        self.assertEqual(type(storage).__name__, "FileStorage")
 
     def test_attributes(self):
         """
@@ -88,7 +94,7 @@ class TestStorage(unittest.TestCase):
     def check_all_multiple(self, class_name):
         """
         """
-        self.resetStorage()
+        self.reset_Storage()
 
         objs = [eval(class_name)() for i in range(1000)]
         [storage.new(o) for o in objs]
@@ -129,7 +135,7 @@ class TestStorage(unittest.TestCase):
     def check_new(self, class_name):
         """
         """
-        self.resetStorage()
+        self.reset_Storage()
         o = eval(class_name)()
         storage.new(o)
         key = "{}.{}".format(type(o).__name__, o.id)

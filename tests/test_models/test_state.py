@@ -1,0 +1,54 @@
+#!/usr/bin/python3
+"""
+"""
+
+
+import unittest
+from models.base_model import BaseModel
+from models.state import State
+from models.engine.file_storage import FileStorage
+import os
+
+
+class TestState(unittest.TestCase):
+    """
+    """
+
+    def setUp(self):
+        """
+        """
+        pass
+
+    def reset_Storage(self):
+        """
+        """
+        FileStorage._FileStorage__objects = {}
+        if os.path.exists(FileStorage._FileStorage__file_path):
+            os.remove(FileStorage._FileStorage__file_path)
+
+    def tearDown(self):
+        """
+        """
+        self.reset_Storage()
+        pass
+
+    def test_instance(self):
+        """
+        """
+        state = State()
+        self.assertEqual(str(type(state)), "<class 'models.state.State'>")
+        self.assertIsInstance(state, State)
+        self.assertTrue(issubclass(type(state), BaseModel))
+
+    def test_attr(self):
+        """
+        """
+        attr = {'name': str}
+        state = State()
+        for k, v in attr.items():
+            self.assertTrue(hasattr(state, k))
+            self.assertEqual(type(getattr(state, k, None)), v)
+
+
+if __name__ == "__main__":
+    unittest.main()
