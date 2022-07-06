@@ -61,7 +61,8 @@ class TestBaseModel(unittest.TestCase):
     def test_attributes(self):
         """Tests attributes value for instance of a BaseModel class."""
 
-        attributes = ["id", "created_at", "updated_at"]
+        attributes = {"id": str, "created_at": datetime,
+                      "updated_at": datetime}
         o = BaseModel()
         for k, v in attributes.items():
             self.assertTrue(hasattr(o, k))
@@ -79,8 +80,8 @@ class TestBaseModel(unittest.TestCase):
     def test_id(self):
         """Tests for unique user ids."""
 
-        l = [BaseModel().id for i in range(1000)]
-        self.assertEqual(len(set(l)), len(l))
+        h = [BaseModel().id for i in range(1000)]
+        self.assertEqual(len(set(h)), len(h))
 
     def test_save(self):
         """Tests the public instance method save()."""
