@@ -12,14 +12,10 @@ import os
 
 
 class TestUser(unittest.TestCase):
-    """
-    Test the user class and its methods.
-    """
+    """ Test the user class and its methods. """
 
     def setUp(self):
-        """
-        Test setUp method
-        """
+        """ Test setUp method """
         pass
 
     def reset_Storage(self):
