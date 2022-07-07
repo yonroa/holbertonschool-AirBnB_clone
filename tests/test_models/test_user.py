@@ -23,29 +23,25 @@ class TestUser(unittest.TestCase):
         pass
 
     def reset_Storage(self):
-        """
-        """
+        """ test reset_Storage """
         FileStorage._FileStorage__objects = {}
         if os.path.exists(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
 
     def tearDown(self):
-        """
-        """
+        """ Test tearDown method """
         self.reset_Storage()
         pass
 
     def test_instance(self):
-        """
-        """
+        """Test instance of BaseModel"""
         user = User()
         self.assertEqual(str(type(user)), "<class 'models.user.User'>")
         self.assertIsInstance(user, User)
         self.assertTrue(issubclass(type(user), BaseModel))
 
     def test_attr(self):
-        """
-        """
+        """ Test instance attributes attr """
         attr = {'email': str, 'password': str,
                 'first_name': str, 'last_name': str}
         user = User()
