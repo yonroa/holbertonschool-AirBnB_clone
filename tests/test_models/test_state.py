@@ -24,6 +24,7 @@ class TestState(unittest.TestCase):
 
     def reset_Storage(self):
         """
+        Test reset_Storage
         """
         FileStorage._FileStorage__objects = {}
         if os.path.exists(FileStorage._FileStorage__file_path):
@@ -31,12 +32,14 @@ class TestState(unittest.TestCase):
 
     def tearDown(self):
         """
+        Test tearDown method
         """
         self.reset_Storage()
         pass
 
     def test_instance(self):
         """
+        Test instance of BaseModel
         """
         state = State()
         self.assertEqual(str(type(state)), "<class 'models.state.State'>")
@@ -45,6 +48,7 @@ class TestState(unittest.TestCase):
 
     def test_attr(self):
         """
+        Test instance attributes attr
         """
         attr = {'name': str}
         state = State()
