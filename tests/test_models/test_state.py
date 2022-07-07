@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """
+This is the test module for the state class.
 """
 
 
@@ -12,10 +13,12 @@ import os
 
 class TestState(unittest.TestCase):
     """
+    Test state class methods
     """
 
     def setUp(self):
         """
+        Test setUp method
         """
         pass
 
