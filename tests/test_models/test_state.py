@@ -12,44 +12,32 @@ import os
 
 
 class TestState(unittest.TestCase):
-    """
-    Test state class methods
-    """
+    """ Test state class methods """
 
     def setUp(self):
-        """
-        Test setUp method
-        """
+        """ Test setUp method """
         pass
 
     def reset_Storage(self):
-        """
-        Test reset_Storage
-        """
+        """ Test reset_Storage """
         FileStorage._FileStorage__objects = {}
         if os.path.exists(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
 
     def tearDown(self):
-        """
-        Test tearDown method
-        """
+        """ Test tearDown method """
         self.reset_Storage()
         pass
 
     def test_instance(self):
-        """
-        Test instance of BaseModel
-        """
+        """ Test instance of BaseModel """
         state = State()
         self.assertEqual(str(type(state)), "<class 'models.state.State'>")
         self.assertIsInstance(state, State)
         self.assertTrue(issubclass(type(state), BaseModel))
 
     def test_attr(self):
-        """
-        Test instance attributes attr
-        """
+        """ Test instance attributes attr """
         attr = {'name': str}
         state = State()
         for k, v in attr.items():

@@ -12,35 +12,25 @@ import os
 
 
 class TestAmenity(unittest.TestCase):
-    """
-    Test the amenity class
-    """
+    """Test the amenity class methods"""
 
     def setUp(self):
-        """
-        Test Set instance attributes
-        """
+        """ Test Set instance attributes """
         pass
 
     def reset_Storage(self):
-        """
-        Test reset_Storage
-        """
+        """ Test reset_Storage """
         FileStorage._FileStorage__objects = {}
         if os.path.exists(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
 
     def tearDown(self):
-        """
-        Test tearDown method
-        """
+        """ Test tearDown method """
         self.reset_Storage()
         pass
 
     def test_instance(self):
-        """
-        Test instance of BaseModel
-        """
+        """Test instance of BaseModel """
         amenity = Amenity()
         self.assertEqual(str(type(amenity)),
                          "<class 'models.amenity.Amenity'>")
@@ -48,9 +38,7 @@ class TestAmenity(unittest.TestCase):
         self.assertTrue(issubclass(type(amenity), BaseModel))
 
     def test_attr(self):
-        """
-        Test instance attributes attr 
-        """
+        """ Test instance attributes attr """
         attr = {'name': str}
         amenity = Amenity()
         for k, v in attr.items():
