@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """
+This is the amenity test module.
 """
 
 
@@ -12,15 +13,18 @@ import os
 
 class TestAmenity(unittest.TestCase):
     """
+    Test the amenity class
     """
 
     def setUp(self):
         """
+        Test Set instance attributes
         """
         pass
 
     def reset_Storage(self):
         """
+        Test reset_Storage
         """
         FileStorage._FileStorage__objects = {}
         if os.path.exists(FileStorage._FileStorage__file_path):
@@ -28,12 +32,14 @@ class TestAmenity(unittest.TestCase):
 
     def tearDown(self):
         """
+        Test tearDown method
         """
         self.reset_Storage()
         pass
 
     def test_instance(self):
         """
+        Test instance of BaseModel
         """
         amenity = Amenity()
         self.assertEqual(str(type(amenity)),
@@ -43,6 +49,7 @@ class TestAmenity(unittest.TestCase):
 
     def test_attr(self):
         """
+        Test instance attributes attr 
         """
         attr = {'name': str}
         amenity = Amenity()
