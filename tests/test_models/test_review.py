@@ -32,12 +32,14 @@ class TestReview(unittest.TestCase):
 
     def tearDown(self):
         """
+        Test tearDown method
         """
         self.reset_Storage()
         pass
 
     def test_instance(self):
         """
+        Test instance of BaseModel
         """
         review = Review()
         self.assertEqual(str(type(review)), "<class 'models.review.Review'>")
@@ -46,6 +48,7 @@ class TestReview(unittest.TestCase):
 
     def test_attr(self):
         """
+        Test instance attributes attr
         """
         attr = {'place_id': str, 'user_id': str, 'text': str}
         review = Review()
