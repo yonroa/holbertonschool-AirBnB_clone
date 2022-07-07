@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """
+Test the user class and its methods.
 """
 
 
