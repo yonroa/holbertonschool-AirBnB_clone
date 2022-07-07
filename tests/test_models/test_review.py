@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """
+This is the test module for the review class.
 """
 
 
@@ -12,15 +13,18 @@ import os
 
 class TestReview(unittest.TestCase):
     """
+    Test the instance attributes of the Review class.
     """
 
     def setUp(self):
         """
+        Test setUp method
         """
         pass
 
     def reset_Storage(self):
         """
+        Test reset_Storage
         """
         FileStorage._FileStorage__objects = {}
         if os.path.exists(FileStorage._FileStorage__file_path):
