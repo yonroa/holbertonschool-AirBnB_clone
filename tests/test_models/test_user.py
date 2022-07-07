@@ -13,10 +13,12 @@ import os
 
 class TestUser(unittest.TestCase):
     """
+    Test the user class and its methods.
     """
 
     def setUp(self):
         """
+        Test setUp method
         """
         pass
 
