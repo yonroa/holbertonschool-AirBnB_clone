@@ -48,6 +48,7 @@ class TestCity(unittest.TestCase):
 
     def test_attr(self):
         """
+        Test instance attributes attr
         """
         attr = {'state_id': str, 'name': str}
         city = City()
