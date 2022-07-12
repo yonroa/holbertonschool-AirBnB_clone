@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """
+This is the test module for the BaseModel class.
 """
 
 
@@ -11,38 +12,32 @@ import os
 
 
 class TestPlace(unittest.TestCase):
-    """
-    """
+    """ Test the place class """
 
     def setUp(self):
-        """
-        """
+        """ Test setUp method """
         pass
 
     def reset_Storage(self):
-        """
-        """
+        """ Test reset_Storage """
         FileStorage._FileStorage__objects = {}
         if os.path.exists(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
 
     def tearDown(self):
-        """
-        """
+        """ Test tearDown method """
         self.reset_Storage()
         pass
 
     def test_instance(self):
-        """
-        """
+        """ Test instance of BaseModel"""
         place = Place()
         self.assertEqual(str(type(place)), "<class 'models.place.Place'>")
         self.assertIsInstance(place, Place)
         self.assertTrue(issubclass(type(place), BaseModel))
 
     def test_attr(self):
-        """
-        """
+        """ Test instance attributes attr """
         attr = {'city_id': str, 'user_id': str, 'name': str,
                 'description': str, 'number_rooms': int,
                 'number_bathrooms': int, 'max_guest': int,
